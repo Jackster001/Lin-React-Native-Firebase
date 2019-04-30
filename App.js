@@ -1,45 +1,31 @@
 import React from 'react';
 import { StyleSheet, Platform, Image, Text, View, ScrollView } from 'react-native';
-
+import { SwitchNavigator, createStackNavigator, createAppContainer} from 'react-navigation';
 import firebase from 'react-native-firebase';
+// import the different screens
+import Loading from './Screens/Loading'
+import SignUp from './Screens/SignUp'
+import Login from './Screens/Login'
+import Home from './Screens/Home'
 
-export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
+// create our app's navigation stack
+// createStackNavigator
+const AppNavigation = createStackNavigator(
+  {
+    Loading,
+    SignUp,
+    Login,
+    Home
+  },
+  {
+    initialRouteName: 'Loading'
   }
+)
+const App = createAppContainer(AppNavigation);
 
-  async componentDidMount() {
-    // TODO: You: Do firebase things
-    // const { user } = await firebase.auth().signInAnonymously();
-    // console.warn('User -> ', user.toJSON());
+export default App;
 
-    // await firebase.analytics().logEvent('foo', { bar: '123'});
-  }
-
-  render() {
-    return (
-      <ScrollView>
-        <View style={styles.container}>
-          <Image source={require('./assets/ReactNativeFirebase.png')} style={[styles.logo]}/>
-          <Text style={styles.welcome}>
-            Welcome to {'\n'} React Native Firebase
-          </Text>
-          <Text style={styles.instructions}>
-            To get started, edit App.js
-          </Text>
-          {Platform.OS === 'ios' ? (
-            <Text style={styles.instructions}>
-              Press Cmd+R to reload,{'\n'}
-              Cmd+D or shake for dev menu
-            </Text>
-          ) : (
-            <Text style={styles.instructions}>
-              Double tap R on your keyboard to reload,{'\n'}
-              Cmd+M or shake for dev menu
-            </Text>
-          )}
-          <View style={styles.modules}>
+          {/* <View style={styles.modules}>
             <Text style={styles.modulesHeader}>The following Firebase modules are pre-installed:</Text>
             {firebase.admob.nativeModuleExists && <Text style={styles.module}>admob()</Text>}
             {firebase.analytics.nativeModuleExists && <Text style={styles.module}>analytics()</Text>}
@@ -56,12 +42,7 @@ export default class App extends React.Component {
             {firebase.notifications.nativeModuleExists && <Text style={styles.module}>notifications()</Text>}
             {firebase.perf.nativeModuleExists && <Text style={styles.module}>perf()</Text>}
             {firebase.storage.nativeModuleExists && <Text style={styles.module}>storage()</Text>}
-          </View>
-        </View>
-      </ScrollView>
-    );
-  }
-}
+          </View> */}
 
 const styles = StyleSheet.create({
   container: {
@@ -100,3 +81,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
+
